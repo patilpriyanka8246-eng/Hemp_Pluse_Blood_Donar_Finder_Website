@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Authentication - HemoPulse Blood Donor Network</title>
+  <meta name="description" content="Sign in or register for administrative and hospital coordinator access to the HemoPulse donor grid.">
+
+  <!-- Typography & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#b70011",
+            "primary-container": "#dc2626",
+            "on-primary": "#ffffff",
+            "surface": "#faf8ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f2f3ff",
+            "surface-container": "#eaedff",
+            "on-surface": "#131b2e"
+          },
+          fontFamily: {
+            body: ["Plus Jakarta Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="w-full bg-surface/90 backdrop-blur-xl border-b border-gray-100 py-4">
+    <div class="max-w-[1280px] mx-auto px-4 flex items-center justify-between">
+      <a class="flex items-center gap-2" href="index.html">
+        <div class="w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center font-extrabold text-lg shadow-sm">
+          🩸
+        </div>
+        <span class="text-xl text-primary tracking-tight font-extrabold">HemoPulse</span>
+      </a>
+      <a href="index.html" class="text-xs font-semibold text-gray-600 hover:text-primary flex items-center gap-1">
+        <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+        Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Auth Center Card -->
+  <main class="flex-1 flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md bg-surface-container-lowest rounded-3xl p-8 shadow-2xl border border-gray-100 relative">
+      
+      <!-- Top Icon -->
+      <div class="text-center mb-6">
+        <div class="w-14 h-14 bg-red-100 text-primary rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-sm">
+          <span class="material-symbols-outlined text-[28px]">lock</span>
+        </div>
+        <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Portal Authentication</h1>
+        <p class="text-xs text-gray-500 mt-1">Access the central administration and coordinator dashboard.</p>
+      </div>
+
+      <!-- Quick Demo Credentials Chips for Viva Evaluators -->
+      <div class="mb-6 p-3 bg-red-50/70 rounded-2xl border border-red-100 text-xs">
+        <span class="font-bold text-primary block uppercase tracking-wider mb-2">⚡ 1-Click Evaluator Demo Accounts:</span>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" onclick="fillCredentials('admin@hemopulse.org', 'admin123')" class="px-2.5 py-1 bg-white hover:bg-red-100 text-red-900 font-bold rounded-lg border border-red-200 transition-colors shadow-xs">
+            Admin Demo
+          </button>
+          <button type="button" onclick="fillCredentials('coordinator@hospital.org', 'coord123')" class="px-2.5 py-1 bg-white hover:bg-red-100 text-red-900 font-bold rounded-lg border border-red-200 transition-colors shadow-xs">
+            Coordinator Demo
+          </button>
+          <button type="button" onclick="fillCredentials('donor@hemopulse.org', 'donor123')" class="px-2.5 py-1 bg-white hover:bg-red-100 text-red-900 font-bold rounded-lg border border-red-200 transition-colors shadow-xs">
+            Donor Demo
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="flex bg-surface-container-low p-1 rounded-xl mb-6 text-xs font-bold">
+        <button id="tab-login-btn" onclick="switchAuthTab('login')" class="flex-1 py-2 rounded-lg bg-white text-gray-900 shadow-sm transition-all">
+          Sign In
+        </button>
+        <button id="tab-register-btn" onclick="switchAuthTab('register')" class="flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-900 transition-all">
+          Create Account
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="auth-login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+        <div>
+          <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="login-email">
+            Email Address
+          </label>
+          <input id="login-email" type="email" required placeholder="admin@hemopulse.org" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="login-password">
+            Password
+          </label>
+          <input id="login-password" type="password" required placeholder="••••••••" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+
+        <button id="login-btn" type="submit" class="w-full py-3 bg-primary text-white font-bold text-sm rounded-xl hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-md active:scale-95">
+          <span class="material-symbols-outlined text-[18px]">login</span>
+          Sign In to Portal
+        </button>
+      </form>
+
+      <!-- Registration Form (Hidden by default) -->
+      <form id="auth-register-form" onsubmit="handleRegisterSubmit(event)" class="space-y-4 hidden">
+        <div>
+          <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="reg-name">
+            Full Name
+          </label>
+          <input id="reg-name" type="text" required placeholder="Dr. S. Kulkarni" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="reg-email">
+            Email Address
+          </label>
+          <input id="reg-email" type="email" required placeholder="coordinator@hospital.org" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="reg-role">
+            Account Role
+          </label>
+          <select id="reg-role" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="user">Voluntary Donor / Public User</option>
+            <option value="coordinator">Hospital Coordinator</option>
+            <option value="admin">System Administrator</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="reg-password">
+            Password (Min 6 Characters)
+          </label>
+          <input id="reg-password" type="password" minlength="6" required placeholder="••••••••" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+
+        <button id="register-btn" type="submit" class="w-full py-3 bg-primary text-white font-bold text-sm rounded-xl hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-md active:scale-95">
+          <span class="material-symbols-outlined text-[18px]">person_add</span>
+          Create New Account
+        </button>
+      </form>
+
+    </div>
+  </main>
+
+  <footer class="w-full py-4 text-center text-xs text-gray-500">
+    <p>© 2026 HemoPulse Blood Donor Network • Web Technology Lab Prototype</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    function switchAuthTab(tab) {
+      const loginForm = document.getElementById('auth-login-form');
+      const regForm = document.getElementById('auth-register-form');
+      const tabLoginBtn = document.getElementById('tab-login-btn');
+      const tabRegBtn = document.getElementById('tab-register-btn');
+
+      if (tab === 'login') {
+        loginForm.classList.remove('hidden');
+        regForm.classList.add('hidden');
+        tabLoginBtn.className = 'flex-1 py-2 rounded-lg bg-white text-gray-900 shadow-sm transition-all';
+        tabRegBtn.className = 'flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-900 transition-all';
+      } else {
+        loginForm.classList.add('hidden');
+        regForm.classList.remove('hidden');
+        tabRegBtn.className = 'flex-1 py-2 rounded-lg bg-white text-gray-900 shadow-sm transition-all';
+        tabLoginBtn.className = 'flex-1 py-2 rounded-lg text-gray-500 hover:text-gray-900 transition-all';
+      }
+    }
+
+    function fillCredentials(email, pwd) {
+      switchAuthTab('login');
+      document.getElementById('login-email').value = email;
+      document.getElementById('login-password').value = pwd;
+      showToast(`Prefilled demo credentials for: ${email}`, 'info');
+    }
+
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const btn = document.getElementById('login-btn');
+
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner w-4 h-4 border-2 mr-2"></span> Authenticating...`;
+
+      try {
+        const res = await fetch(`${API_BASE}/users/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const json = await res.json();
+
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">login</span> Sign In to Portal`;
+
+        if (json.success) {
+          saveUserSession(json.token, json.user);
+          showToast(`Welcome back, ${json.user.name}!`, 'success');
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 800);
+        } else {
+          showToast(json.message || 'Login failed', 'error');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">login</span> Sign In to Portal`;
+        showToast('Server communication failure', 'error');
+      }
+    }
+
+    async function handleRegisterSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const role = document.getElementById('reg-role').value;
+      const btn = document.getElementById('register-btn');
+
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner w-4 h-4 border-2 mr-2"></span> Creating Account...`;
+
+      try {
+        const res = await fetch(`${API_BASE}/users/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password, role })
+        });
+        const json = await res.json();
+
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">person_add</span> Create New Account`;
+
+        if (json.success) {
+          saveUserSession(json.token, json.user);
+          showToast(`Account created! Redirecting to Dashboard...`, 'success');
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 800);
+        } else {
+          showToast(json.message || 'Registration failed', 'error');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">person_add</span> Create New Account`;
+        showToast('Server communication failure', 'error');
+      }
+    }
+  </script>
+</body>
+</html>

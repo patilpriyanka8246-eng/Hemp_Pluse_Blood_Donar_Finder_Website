@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Become a Lifesaving Donor - Voluntary Registration | HemoPulse</title>
+  <meta name="description" content="Register as a voluntary blood donor in the national hematology grid to save lives in critical emergencies.">
+
+  <!-- Typography & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#b70011",
+            "primary-container": "#dc2626",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#fff6f5",
+            "surface": "#faf8ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f2f3ff",
+            "surface-container": "#eaedff",
+            "surface-container-high": "#e2e7ff",
+            "on-surface": "#131b2e",
+            "on-surface-variant": "#5c403c",
+            "secondary": "#006c49",
+            "secondary-container": "#6cf8bb",
+            "on-secondary-container": "#00714d",
+            "tertiary": "#9f3700",
+            "tertiary-container": "#c84700",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6"
+          },
+          fontFamily: {
+            body: ["Plus Jakarta Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-surface font-body text-on-surface">
+
+  <!-- Header Navigation -->
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-20 max-w-[1280px] mx-auto px-4 lg:px-8 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <a class="flex items-center gap-2" href="index.html">
+          <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-extrabold text-xl shadow-md">
+            🩸
+          </div>
+          <span class="text-2xl text-primary tracking-tight font-extrabold">HemoPulse</span>
+        </a>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-2">
+        <a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-gray-100/50 rounded-lg transition-colors font-medium" href="index.html">Home</a>
+        <a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-gray-100/50 rounded-lg transition-colors font-medium" href="find-donor.html">Find Donor</a>
+        <a class="px-4 py-2 text-sm rounded-lg transition-colors bg-primary-container text-on-primary-container font-bold" href="register.html">Become a Donor</a>
+        <a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-gray-100/50 rounded-lg transition-colors font-medium" href="request.html">Blood Request</a>
+        <a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-gray-100/50 rounded-lg transition-colors font-medium" href="dashboard.html">Dashboard</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <div id="nav-auth-container" class="flex items-center gap-2">
+          <a href="login.html" class="px-3.5 py-1.5 text-sm font-semibold text-gray-700 hover:text-primary transition-colors">Sign In</a>
+        </div>
+        <a class="relative inline-flex items-center gap-1.5 px-4 py-2 bg-primary-container text-on-primary-container rounded-full text-sm font-bold shadow-sm hover:bg-primary hover:text-on-primary transition-all duration-200" href="request.html">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+          </span>
+          <span class="whitespace-nowrap">Emergency Requisition</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full pt-28 pb-20 min-h-screen">
+    <div class="max-w-[1080px] mx-auto px-4 lg:px-8">
+
+      <!-- Breadcrumbs & Heading -->
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+          <span class="material-symbols-outlined text-[16px]">volunteer_activism</span>
+          National Voluntary Donor Enrolment
+        </div>
+        <h1 class="text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">
+          Join the Lifesaving Donor Registry
+        </h1>
+        <p class="text-sm text-gray-600 mt-2">
+          Your voluntary pledge ensures rapid matching for trauma, surgical, and pediatric emergencies in your city.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- Form Card (Col 8) -->
+        <div class="lg:col-span-8 bg-surface-container-lowest rounded-3xl p-6 lg:p-8 shadow-xl border border-gray-100">
+          <form id="donor-registration-form" class="space-y-6">
+
+            <!-- Section 1: Personal Profile -->
+            <div>
+              <h2 class="text-base font-bold text-gray-900 flex items-center gap-2 border-b border-gray-100 pb-2 mb-4">
+                <span class="w-6 h-6 rounded-full bg-red-100 text-primary flex items-center justify-center text-xs">1</span>
+                Personal Information
+              </h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="sm:col-span-2">
+                  <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="name">
+                    Full Name <span class="text-primary">*</span>
+                  </label>
+                  <input id="name" name="name" type="text" required placeholder="e.g. Dr. Rajesh Sharma" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+
+                <div>
+                  <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="email">
+                    Email Address <span class="text-primary">*</span>
+                  </label>
+                  <input id="email" name="email" type="email" required placeholder="donor@example.com" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+
+                <div>
+                  <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="phone">
+                    Phone Number <span class="text-primary">*</span>
+                  </label>
+                  <input id="phone" name="phone" type="tel" required placeholder="+91 98230 11223" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+
+                <div>
+                  <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="age">
+                    Age (Years) <span class="text-primary">*</span>
+                  </label>
+                  <input id="age" name="age" type="number" min="18" max="65" required placeholder="18 - 65" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+
+                <div>
+                  <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="gender">
+                    Gender
+                  </label>
+                  <select id="gender" name="gender" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Hematology Profile -->
+            <div>
+              <h2 class="text-base font-bold text-gray-900 flex items-center gap-2 border-b border-gray-100 pb-2 mb-4">
+                <span class="w-6 h-6 rounded-full bg-red-100 text-primary flex items-center justify-center text-xs">2</span>
+                Blood Type & Donation Status
+              </h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="bloodGroup">
+                    Blood Group <span class="text-primary">*</span>
+                  </label>
+                  <div class="relative">
+                    <select id="bloodGroup" name="bloodGroup" required class="w-full h-11 px-3.5 bg-surface-container-low text-primary font-extrabold text-base rounded-xl focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer">
+                      <option value="">Select Blood Group</option>
+                      <option value="O-">O Negative (O-)</option>
+                      <option value="O+">O Positive (O+)</option>
+                      <option value="A+">A Positive (A+)</option>
+                      <option value="A-">A Negative (A-)</option>
+                      <option value="B+">B Positive (B+)</option>
+                      <option value="B-">B Negative (B-)</option>
+                      <option value="AB+">AB Positive (AB+)</option>
+                      <option value="AB-">AB Negative (AB-)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="lastDonationDate">
+                    Last Donation Date (if any)
+                  </label>
+                  <input id="lastDonationDate" name="lastDonationDate" type="date" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label class="flex items-center gap-3 p-3.5 bg-surface-container-low rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+                    <input id="isAvailable" name="isAvailable" type="checkbox" checked class="w-5 h-5 text-primary rounded focus:ring-primary cursor-pointer">
+                    <div>
+                      <span class="text-sm font-bold text-gray-900 block">Mark as Immediately Available to Donate</span>
+                      <span class="text-xs text-gray-500">You will appear in urgent emergency search queries for your district.</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 3: Geographic Location -->
+            <div>
+              <h2 class="text-base font-bold text-gray-900 flex items-center gap-2 border-b border-gray-100 pb-2 mb-4">
+                <span class="w-6 h-6 rounded-full bg-red-100 text-primary flex items-center justify-center text-xs">3</span>
+                Location & Clinical Vicinity
+              </h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="city">
+                    City <span class="text-primary">*</span>
+                  </label>
+                  <input id="city" name="city" type="text" required placeholder="e.g. Pune" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+
+                <div>
+                  <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="district">
+                    District / Locality
+                  </label>
+                  <input id="district" name="district" type="text" placeholder="e.g. Shivajinagar / Kothrud" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="notes">
+                    Donor Note / Availability Timings (Optional)
+                  </label>
+                  <input id="notes" name="notes" type="text" placeholder="e.g. Available post 6 PM and on weekends for critical emergencies" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 4: Eligibility & Declaration -->
+            <div class="p-4 bg-gray-50 rounded-2xl border border-gray-200/60 space-y-2 text-xs text-gray-600">
+              <label class="flex items-start gap-2 cursor-pointer">
+                <input type="checkbox" required class="mt-0.5 text-primary rounded">
+                <span>I confirm I weigh over 50 kg and have not suffered from hepatitis, HIV, or chronic cardiovascular disorders.</span>
+              </label>
+              <label class="flex items-start gap-2 cursor-pointer">
+                <input type="checkbox" required class="mt-0.5 text-primary rounded">
+                <span>I pledge this voluntary registration without monetary consideration as per the National Blood Policy.</span>
+              </label>
+            </div>
+
+            <!-- Submit CTA -->
+            <div>
+              <button id="donor-submit-btn" type="submit" class="w-full py-3.5 bg-primary text-white font-extrabold text-sm rounded-xl hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-95">
+                <span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+                Complete Registration
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Sidebar Guidelines (Col 4) -->
+        <div class="lg:col-span-4 space-y-6">
+          <!-- Why Donate Card -->
+          <div class="bg-surface-container-lowest p-6 rounded-3xl shadow-md border border-gray-100">
+            <h3 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">favorite</span>
+              Donation Guidelines
+            </h3>
+            <ul class="space-y-3 text-xs text-gray-600">
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-secondary text-[16px] shrink-0 mt-0.5">check_circle</span>
+                <span><strong>Interval:</strong> Minimum 90 days required between whole blood donations.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-secondary text-[16px] shrink-0 mt-0.5">check_circle</span>
+                <span><strong>Hydration:</strong> Drink plenty of water before and after donation.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-secondary text-[16px] shrink-0 mt-0.5">check_circle</span>
+                <span><strong>Impact:</strong> 1 single whole blood donation can save up to 3 individual patients.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-secondary text-[16px] shrink-0 mt-0.5">check_circle</span>
+                <span><strong>Privacy:</strong> Your contact number is only shared during real-time critical emergencies.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Academic Evaluation Card -->
+          <div class="bg-red-50 p-6 rounded-3xl border border-red-100">
+            <div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider mb-2">
+              <span class="material-symbols-outlined text-[18px]">school</span>
+              WTL Viva Technical Note
+            </div>
+            <p class="text-xs text-gray-700 leading-relaxed">
+              Submitting this form executes a client-side validation check, followed by an asynchronous <code>fetch()</code> POST request with JSON payload to <code>/api/donors</code>. The backend controller validates the schema constraints and saves the document in MongoDB.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="w-full bg-surface-container-low border-t border-gray-200/50 py-8 text-center text-xs text-gray-500">
+    <div class="max-w-[1280px] mx-auto px-4">
+      <p>© 2026 HemoPulse Blood Donor Finder • Web Technology Lab Examination System</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/donor.js"></script>
+</body>
+</html>

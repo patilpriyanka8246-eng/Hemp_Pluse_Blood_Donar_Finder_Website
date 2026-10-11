@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Emergency Blood Request - Lifesaving Requisition | HemoPulse</title>
+  <meta name="description" content="Submit urgent blood requisitions for hospital surgeries, trauma care, and clinical transfusions.">
+
+  <!-- Typography & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#b70011",
+            "primary-container": "#dc2626",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#fff6f5",
+            "surface": "#faf8ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f2f3ff",
+            "surface-container": "#eaedff",
+            "surface-container-high": "#e2e7ff",
+            "on-surface": "#131b2e",
+            "on-surface-variant": "#5c403c",
+            "secondary": "#006c49",
+            "secondary-container": "#6cf8bb",
+            "on-secondary-container": "#00714d",
+            "tertiary": "#9f3700",
+            "tertiary-container": "#c84700",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6"
+          },
+          fontFamily: {
+            body: ["Plus Jakarta Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-surface font-body text-on-surface">
+
+  <!-- Header Navigation -->
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-20 max-w-[1280px] mx-auto px-4 lg:px-8 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <a class="flex items-center gap-2" href="index.html">
+          <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-extrabold text-xl shadow-md">
+            🩸
+          </div>
+          <span class="text-2xl text-primary tracking-tight font-extrabold">HemoPulse</span>
+        </a>
+      </div>
+
+      <nav class="hidden lg:flex items-center gap-2">
+        <a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-gray-100/50 rounded-lg transition-colors font-medium" href="index.html">Home</a>
+        <a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-gray-100/50 rounded-lg transition-colors font-medium" href="find-donor.html">Find Donor</a>
+        <a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-gray-100/50 rounded-lg transition-colors font-medium" href="register.html">Become a Donor</a>
+        <a class="px-4 py-2 text-sm rounded-lg transition-colors bg-primary-container text-on-primary-container font-bold" href="request.html">Blood Request</a>
+        <a class="px-4 py-2 text-sm text-on-surface-variant hover:text-on-surface hover:bg-gray-100/50 rounded-lg transition-colors font-medium" href="dashboard.html">Dashboard</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <div id="nav-auth-container" class="flex items-center gap-2">
+          <a href="login.html" class="px-3.5 py-1.5 text-sm font-semibold text-gray-700 hover:text-primary transition-colors">Sign In</a>
+        </div>
+        <a class="relative inline-flex items-center gap-1.5 px-4 py-2 bg-primary-container text-on-primary-container rounded-full text-sm font-bold shadow-sm hover:bg-primary hover:text-on-primary transition-all duration-200" href="request.html">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+          </span>
+          <span class="whitespace-nowrap">Emergency Requisition</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full pt-28 pb-20 min-h-screen">
+    <div class="max-w-[1280px] mx-auto px-4 lg:px-8">
+
+      <!-- Breadcrumbs & Heading -->
+      <div class="mb-8">
+        <div class="flex items-center gap-2 text-xs font-semibold text-gray-500 mb-2">
+          <a href="index.html" class="hover:text-primary">Home</a>
+          <span>/</span>
+          <span class="text-primary">Create Blood Request</span>
+        </div>
+        <h1 class="text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">
+          Emergency Blood Requisition Portal
+        </h1>
+        <p class="text-sm text-gray-600 mt-1">
+          Broadcast critical blood needs immediately to all compatible registered donors in your vicinity.
+        </p>
+      </div>
+
+      <!-- Main Layout: Form + Live Interactive Preview Card -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+
+        <!-- Form Card (Col 7) -->
+        <div class="lg:col-span-7 bg-surface-container-lowest rounded-3xl p-6 lg:p-8 shadow-xl border border-gray-100">
+          <form id="blood-request-form" class="space-y-5">
+            <h2 class="text-base font-bold text-gray-900 flex items-center gap-2 border-b border-gray-100 pb-3">
+              <span class="material-symbols-outlined text-primary text-[20px]">emergency</span>
+              Clinical Demand Details
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Patient Name -->
+              <div>
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-patient">
+                  Patient Name <span class="text-primary">*</span>
+                </label>
+                <input id="req-patient" name="patientName" type="text" required placeholder="e.g. Master Aarav Joshi" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+
+              <!-- Hospital Name -->
+              <div>
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-hospital">
+                  Hospital / Clinic Name <span class="text-primary">*</span>
+                </label>
+                <input id="req-hospital" name="hospitalName" type="text" required placeholder="e.g. City Children's Hospital" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+
+              <!-- Blood Group -->
+              <div>
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-blood-group">
+                  Blood Group Required <span class="text-primary">*</span>
+                </label>
+                <div class="relative">
+                  <select id="req-blood-group" name="bloodGroup" required class="w-full h-11 px-3.5 bg-surface-container-low text-primary font-extrabold text-base rounded-xl focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer">
+                    <option value="O-">O Negative (O-)</option>
+                    <option value="O+">O Positive (O+)</option>
+                    <option value="A+">A Positive (A+)</option>
+                    <option value="A-">A Negative (A-)</option>
+                    <option value="B+">B Positive (B+)</option>
+                    <option value="B-">B Negative (B-)</option>
+                    <option value="AB+">AB Positive (AB+)</option>
+                    <option value="AB-">AB Negative (AB-)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Units Needed -->
+              <div>
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-units">
+                  Units Required <span class="text-primary">*</span>
+                </label>
+                <input id="req-units" name="units" type="number" min="1" max="20" value="2" required class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+
+              <!-- Urgency Level -->
+              <div>
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-urgency">
+                  Urgency Level <span class="text-primary">*</span>
+                </label>
+                <select id="req-urgency" name="urgency" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+                  <option value="Critical">Critical (&lt; 2 Hours / Immediate)</option>
+                  <option selected value="Urgent">Urgent (&lt; 12 Hours)</option>
+                  <option value="Standard">Standard / Planned (Within 48 Hours)</option>
+                </select>
+              </div>
+
+              <!-- City -->
+              <div>
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-city">
+                  City Location <span class="text-primary">*</span>
+                </label>
+                <input id="req-city" name="city" type="text" required placeholder="e.g. Pune" value="Pune" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+
+              <!-- Ward or Department -->
+              <div>
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-ward">
+                  Ward / Dept / Bed No.
+                </label>
+                <input id="req-ward" name="wardOrDept" type="text" placeholder="e.g. ICU Ward 4, Bed 12" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+
+              <!-- Reason / Surgery -->
+              <div>
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-reason">
+                  Clinical Reason / Diagnosis
+                </label>
+                <input id="req-reason" name="reason" type="text" placeholder="e.g. Pediatric Surgery / Trauma" value="Pediatric Emergency Surgery" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+
+              <!-- Contact Person -->
+              <div>
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-contact-person">
+                  Contact Person / Attendant <span class="text-primary">*</span>
+                </label>
+                <input id="req-contact-person" name="contactPerson" type="text" required placeholder="e.g. Dr. Alok Verma / Nurse Desk" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+
+              <!-- Contact Phone -->
+              <div>
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-contact-phone">
+                  Contact Phone Number <span class="text-primary">*</span>
+                </label>
+                <input id="req-contact-phone" name="contactPhone" type="tel" required placeholder="+91 98230 44001" class="w-full h-11 px-3.5 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary">
+              </div>
+
+              <!-- Additional Notes -->
+              <div class="sm:col-span-2">
+                <label class="text-xs font-bold text-gray-700 uppercase tracking-wider block mb-1" for="req-notes">
+                  Additional Notes / Specific Instructions
+                </label>
+                <textarea id="req-notes" name="notes" rows="2" placeholder="e.g. Blood bank replacement accepted, patient admit registration ID provided on site." class="w-full p-3 bg-surface-container-low text-gray-900 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+              </div>
+            </div>
+
+            <!-- Submit Requisition Button -->
+            <button id="req-submit-btn" type="submit" class="w-full py-3.5 bg-primary text-white font-extrabold text-sm rounded-xl hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-95">
+              <span class="material-symbols-outlined text-[20px]">crisis_alert</span>
+              Broadcast Blood Requisition
+            </button>
+          </form>
+        </div>
+
+        <!-- Live Reactive Preview Card (Col 5) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="bg-surface-container-lowest rounded-3xl p-6 shadow-md border border-gray-100 sticky top-28">
+            <div class="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
+              <span class="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[18px] text-primary">visibility</span>
+                Live Broadcast Preview
+              </span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-red-50 text-primary font-bold">Auto-Updating</span>
+            </div>
+
+            <!-- The Card itself -->
+            <article class="bg-surface-container-low rounded-2xl p-5 border border-red-100 flex flex-col justify-between relative overflow-hidden">
+              <div class="absolute top-0 left-0 right-0 h-1.5 bg-primary"></div>
+              <div>
+                <div class="flex items-start justify-between gap-2 mb-3">
+                  <div>
+                    <div id="preview-urgency" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 mb-2">
+                      Urgent Requirement
+                    </div>
+                    <h3 id="preview-reason" class="text-base font-bold text-gray-900 leading-tight">Pediatric Emergency Surgery</h3>
+                    <p id="preview-hospital" class="text-xs text-gray-600 flex items-center gap-1 mt-1 font-medium">
+                      City Children's Hospital
+                    </p>
+                  </div>
+                  <div id="preview-blood-badge" class="w-12 h-12 rounded-xl bg-primary text-white font-extrabold text-lg flex items-center justify-center shrink-0 shadow-md">
+                    O-
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 p-3 bg-white rounded-xl text-xs mb-3 shadow-xs">
+                  <div>
+                    <span class="text-gray-400 block uppercase">Required</span>
+                    <span id="preview-units" class="font-bold text-primary">2 Units Required</span>
+                  </div>
+                  <div>
+                    <span class="text-gray-400 block uppercase">Location</span>
+                    <span id="preview-city" class="font-bold text-gray-800">Pune</span>
+                  </div>
+                  <div class="col-span-2 pt-1 border-t border-gray-100 text-gray-500">
+                    <span id="preview-contact">Coordinator: Dr. Alok Verma</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-1 flex gap-2">
+                <button type="button" class="flex-1 py-2 bg-primary text-white text-xs font-bold rounded-lg text-center opacity-90 cursor-not-allowed">
+                  Respond / Donate
+                </button>
+                <button type="button" class="p-2 bg-white text-gray-700 rounded-lg text-xs opacity-90 cursor-not-allowed">
+                  Share
+                </button>
+              </div>
+            </article>
+
+            <div class="mt-4 p-3 bg-gray-50 rounded-xl text-xs text-gray-500">
+              💡 <strong>Viva Concept:</strong> When submitted, this emergency trigger emits a REST API POST request to Express.js, storing the document into MongoDB with status <code>Pending</code> and triggering the live alert ticker.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Active Blood Requisitions Feed -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">feed</span>
+            Current Emergency Demands Feed
+          </h2>
+          <button onclick="loadActiveRequestsList()" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px]">refresh</span>
+            Refresh Feed
+          </button>
+        </div>
+
+        <div id="active-requests-feed" class="space-y-3">
+          <!-- Rendered via request.js -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="w-full bg-surface-container-low border-t border-gray-200/50 py-8 text-center text-xs text-gray-500">
+    <div class="max-w-[1280px] mx-auto px-4">
+      <p>© 2026 HemoPulse Blood Donor Finder • Web Technology Lab Examination System</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/request.js"></script>
+</body>
+</html>
